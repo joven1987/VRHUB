@@ -1,0 +1,10 @@
+.infoWindowImages {
+	overflow: hidden !important;
+	width: 200px;
+	height: 120px;
+}
+
+td {
+ 	object-fit: contain;
+}
+
