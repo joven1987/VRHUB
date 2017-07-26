@@ -161,21 +161,26 @@ if(!isset($_SESSION['UserData']['Username'])){
    		//codes for waypoints
 
    		//set markers
-			var marker2Quad = new google.maps.Marker({
-				position: {lat: 10.314291, lng: 123.905279},
-				map: map,
-				title: '2Quad',
-				icon: '../src/icon_marker.png'
-			});
-
-			var markerClip = new google.maps.Marker({
+   			var markerClip = new google.maps.Marker({
 				position: {lat: 10.288038, lng: 123.960269},
 				map: map,
 				title: 'Clip',
 				icon: '../src/icon_marker.png'
+
 			});
+			var marker2Quad = new google.maps.Marker({
+				position: {lat: 10.314291, lng: 123.905279},
+				map: map,
+				title: '2Quad',
+				icon: '../src/icon_marker.png',
+				url: '../2quad/2quad.php'
+			});
+
 			//listen to click event, display 360 image when marker is clicked
 			markerClip.addListener('click', get360Image);
+			marker2Quad.addListener('click', function (){
+			window.location.href = this.url;
+			});
 		//end for markers
 
 

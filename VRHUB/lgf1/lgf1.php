@@ -149,10 +149,14 @@ if(!isset($_SESSION['UserData']['Username'])){
 				position: {lat: 10.314291, lng: 123.905279},
 				map: map,
 				title: '2Quad',
-				icon: '../src/icon_marker.png'
+				icon: '../src/icon_marker.png',
+				url: '../2quad/2quad.php'
 			});
 
 			markerLGF1.addListener('click', get360Image);
+			marker2Quad.addListener('click', function (){
+				window.location.href = this.url;
+			});
 
 
 
