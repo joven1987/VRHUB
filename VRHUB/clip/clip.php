@@ -35,11 +35,6 @@ if(!isset($_SESSION['UserData']['Username'])){
 	<![endif]-->
 </head>
 <body class="index-page">
-	<div>
-	    <select multiple id="waypoints" style="display: none;">
-	      <option value="University Of Cebu - Lapulapu and Mandaue" selected>University Of Cebu - Lapulapu and Mandaue</option>
-	    </select>
- 	</div>
 	<!-- Navbar -->
 	<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
 		<div class="container">
@@ -119,7 +114,16 @@ if(!isset($_SESSION['UserData']['Username'])){
 				</div>
 				
 				<div class="container" style="margin-top: 15px;">
-				<div id="directions-panel" style="z-index: 5; position: absolute; display: block; background-color: white; max-width: 400px;"></div>
+				<div style="z-index: 5; position: absolute; display: block; background-color: white; max-width: 400px;">
+					<select id="waypoints" style="z-index: 7;">
+						<option value='none'>Please select route...</option>
+						<option value="Osmeña Bridge, Lapu-Lapu City, Central Visayas">Osmeña Bridge, Lapu-Lapu City, Central Visayas</option>
+						<option value="Marcelo Fernan Bridge, Mandaue City, Cebu, Philippines">Marcelo Fernan Bridge, Mandaue City, Cebu, Philippines</option>
+					</select>
+					<div id="directions-panel" style="z-index: 6">
+						
+					</div>
+				</div>
 					<div id="container" style="width:100%;height:100vh;">
 						<!--This content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version 10 or higher. -->
 					</div>
@@ -142,11 +146,11 @@ if(!isset($_SESSION['UserData']['Username'])){
 	function getMap () {
 		//variables for waypoints
 		var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true}); //suppressMarkers removes the default marker e.g: A, B etc.
         //variables for way points
 
 			var map = new google.maps.Map(document.getElementById('container'), {
-				zoom: 5,
+				zoom: 13,
 				streetViewControl: false,
 				center: {lat: 10.293568, lng: 123.90195349999999},
 				mapTypeControl: true,
@@ -157,7 +161,9 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 		//codes for waypoints
 			directionsDisplay.setMap(map);
-   		   	calculateAndDisplayRoute(directionsService, directionsDisplay);
+			document.getElementById('waypoints').addEventListener('change', function (){
+	   		   		calculateAndDisplayRoute(directionsService, directionsDisplay);
+			});
    		//codes for waypoints
 
    		//set markers
@@ -209,19 +215,27 @@ if(!isset($_SESSION['UserData']['Username'])){
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
+            var totalDistance = '';
+            var replaceKm = 0;
             var summaryPanel = document.getElementById('directions-panel');
             summaryPanel.innerHTML = '';
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
-              var routeSegment = i + 1;
-              summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-                  '</b><br>';
-              summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+              /*summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
               summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-            }
+              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';*/
+
+              totalDistance = route.legs[i].distance.text;
+              replaceKm += Number(totalDistance.replace('km',''));
+            } 
+            summaryPanel.innerHTML += route.legs[0].start_address + ' TO <br/>';
+            summaryPanel.innerHTML += route.legs[1].end_address + ' VIA <br/>';
+            summaryPanel.innerHTML += route.legs[0].end_address + ' <br/>';
+            summaryPanel.innerHTML += replaceKm.toFixed(2) + ' km';
           } else {
-            window.alert('Directions request failed due to ' + status);
+           directionsDisplay.set('directions', null);
+           document.getElementById('directions-panel').innerHTML = '';
+
           }
         });
       }
@@ -230,6 +244,8 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 <script type="text/javascript">
 	function get360Image () {
+
+		document.getElementById('directions-panel').innerHTML ='';
 			// check for CSS3 3D transformations and WebGL
 			if (ggHasHtml5Css3D() || ggHasWebGL()) {
 				// use HTML5 panorama
