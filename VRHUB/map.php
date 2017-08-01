@@ -166,6 +166,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 				var uluruc = {lat: 10.331583, lng: 123.904338};
 				var ulurud = {lat: 10.316291, lng: 123.904344};
 				var ulurue = {lat: 10.288038, lng: 123.960269};
+				var uluruf = {lat: 10.305767, lng: 123.898923};
 
 				var map = new google.maps.Map(document.getElementById('map'), {
 					zoom: 8,
@@ -283,6 +284,22 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 
 		});
+				var markerf = new google.maps.Marker({
+					position: uluruf,
+					map: map,
+					icon: 'src/icon_marker.png',
+					title: 'St. John Dormitory',
+					// url: 'clip/clip.php'
+
+				});
+				
+				/*markerf.addListener('click', function() {
+           //map.setZoom(20);
+           //map.setCenter(marker.getPosition());
+           window.location.href = this.url;
+
+
+		});*/
 
 				//calculates distance between two points in km's
 			function calcDistance(p1, p2) {
@@ -302,6 +319,8 @@ if(!isset($_SESSION['UserData']['Username'])){
 				var destFlat1 = new google.maps.LatLng(ulurub['lat'], ulurub['lng']);
 				//to Avalon
 				var destAvalon = new google.maps.LatLng(ulurud['lat'], ulurud['lng']);
+				//to St. John Dormitory
+				var destStJohn = new google.maps.LatLng(uluruf['lat'], uluruf['lng']);
 
 
 				//2Quad
@@ -348,7 +367,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 
 				//Avalon
-				var markerContent3 = "<div>Avlon<img src='assets/images/avalon/avalon.jpg' class='infoWindowImages' /></div><div><span>Distance from 2Quad: "+ calcDistance(origin, destAvalon);+"</span></div>";
+				var markerContent3 = "<div>Avalon<img src='assets/images/avalon/avalon.jpg' class='infoWindowImages' /></div><div><span>Distance from 2Quad: "+ calcDistance(origin, destAvalon);+"</span></div>";
 				var infowindow3 = new google.maps.InfoWindow({
 					content: markerContent3,
 					maxWidth: 350
@@ -372,6 +391,19 @@ if(!isset($_SESSION['UserData']['Username'])){
             	});
             	marker5.addListener('mouseout', function (){
 				infowindow4.close(map, marker5);
+				});
+
+				//St. John Dormitory
+				var markerContentf = "<div>St. John Dormitory</div><div><span>Distance from 2Quad: "+ calcDistance(origin, destStJohn);+"</span></div>";
+				var infowindowf = new google.maps.InfoWindow({
+					content: markerContentf,
+					maxWidth: 350
+				});
+				markerf.addListener('mouseover', function() {
+            		infowindowf.open(map, markerf);
+            	});
+            	markerf.addListener('mouseout', function (){
+				infowindowf.close(map, markerf);
 				});
 
 				

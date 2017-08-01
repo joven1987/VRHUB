@@ -114,16 +114,17 @@ if(!isset($_SESSION['UserData']['Username'])){
 				</div>
 				
 				<div class="container" style="margin-top: 15px;">
-				<div style="z-index: 5; position: absolute; display: block; background-color: white; max-width: 400px;">
-					<select id="waypoints" style="z-index: 7;">
-						<option value='none'>Please select route...</option>
-						<option value="Osmeña Bridge, Lapu-Lapu City, Central Visayas">Osmeña Bridge, Lapu-Lapu City, Central Visayas</option>
-						<option value="Marcelo Fernan Bridge, Mandaue City, Cebu, Philippines">Marcelo Fernan Bridge, Mandaue City, Cebu, Philippines</option>
-					</select>
-					<div id="directions-panel" style="z-index: 6">
-						
+					<div style="z-index: 5; position: absolute; display: block; background-color: white; max-width: 300px; overflow: hidden;">
+							<select id="waypoints" style="z-index: 7; width: 300px; overflow: scroll;">
+								<option style="max-width: 300px; overflow: hidden;" value='none'>Please select route...</option>
+								<option style="max-width: 300px; overflow: hidden;" value="Osmeña Bridge, Lapu-Lapu City, Central Visayas">Osmeña Bridge, Lapu-Lapu City, Central Visayas</option>
+								<option style="max-width: 300px; overflow: hidden;" value="Marcelo Fernan Bridge, Mandaue City, Cebu, Philippines">Marcelo Fernan Bridge, Mandaue City, Cebu, Philippines</option>
+							</select>
 					</div>
-				</div>
+					<div style="z-index: 5; position: absolute; display: block; background-color: green; max-width: 300px; top: 180px; min-height: 300px;">
+						<div id="directions-panel" style="z-index: 6;">
+						</div>
+					</div>
 					<div id="container" style="width:100%;height:100vh;">
 						<!--This content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version 10 or higher. -->
 					</div>
@@ -175,7 +176,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 			});
 			var marker2Quad = new google.maps.Marker({
-				position: {lat: 10.314291, lng: 123.905279},
+				position: {lat: 10.3142744, lng: 123.90527240000006},
 				map: map,
 				title: '2Quad',
 				icon: '../src/icon_marker.png',

@@ -113,7 +113,16 @@ if(!isset($_SESSION['UserData']['Username'])){
 					<center><h1>La Guardia Flats 2</h1></center>
 				</div>
 				<div class="container" style="margin-top: 15px;">
-
+				<div style="z-index: 5; position: absolute; display: block; background-color: white; max-width: 400px; border: groove;">
+						<!-- <select id="waypoints" style="z-index: 7;">
+							<option value='none'>Please select route...</option>
+							<option value="Avalon Condo Cebu, Luzon Avenue, Cebu City, Philippines">Avalon Condo Cebu, Luzon Avenue, Cebu City, Philippines</option>
+							<option value="Cardinal Rosales Avenue, Cebu City, Central Visayas and negros road">Cardinal Rosales Avenue, Cebu City, Central Visayas and negros road</option>
+						</select> -->
+						<div id="directions-panel" style="z-index: 6">
+							
+						</div>
+					</div>
 					<div id="container" style="width:100%;height:100vh;">
 						<!-- This content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version 10 or higher. -->
 					</div>
@@ -133,12 +142,27 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 	<script type="text/javascript">
 	function getMap () {
+		//variables for waypoints
+		var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true}); //suppressMarkers removes the default marker e.g: A, B etc.
+        //variables for way points
 			var map = new google.maps.Map(document.getElementById('container'), {
 				zoom: 14,
 				streetViewControl: false,
-				center: {lat: 10.3304499, lng: 123.90739229999997}
+				center: {lat: 10.3304499, lng: 123.90739229999997},
+				mapTypeControl: true,
+          		mapTypeControlOptions: {
+              	style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              	position: google.maps.ControlPosition.TOP_RIGHT}
 			});
+			//codes for waypoints
+			directionsDisplay.setMap(map);
+			// document.getElementById('waypoints').addEventListener('change', function (){
+	   		   		calculateAndDisplayRoute(directionsService, directionsDisplay);
+			// });
+   			//codes for waypoints
 
+   			//set markers
 			var markerLGF2 = new google.maps.Marker({
 				position: {lat: 10.329193, lng: 123.903982},
 				map: map,
@@ -153,19 +177,76 @@ if(!isset($_SESSION['UserData']['Username'])){
 				icon: '../src/icon_marker.png',
 				url: '../2quad/2quad.php'
 			});
-
+			//listen to click event, display 360 image when marker is clicked
 			markerLGF2.addListener('click', get360Image);
 			marker2Quad.addListener('click', function (){
 			window.location.href = this.url;
 			});
-
+			//end for marker
 		}
+		//code for waypoints and calculations
+		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+			var waypts = [];
+			/*var first = new google.maps.LatLng(10.316205, 123.905841);
+            var second = new google.maps.LatLng(10.316965, 123.904020);
+            var third = new google.maps.LatLng(10.316836, 123.903938);
+            var fourth = new google.maps.LatLng(10.316480, 123.904539);
+        var waypts = [{location: first, stopover: false},
+                       {location: second, stopover: false},
+                       {location: third, stopover: false},
+                       {location: fourth, stopover: false}];*/
+        /*var checkboxArray = document.getElementById('waypoints');
+        for (var i = 0; i < checkboxArray.length; i++) {
+          if (checkboxArray.options[i].selected) {
+            waypts.push({
+              location: checkboxArray[i].value,
+              stopover: true
+            });
+          }
+        }*/
+
+        directionsService.route({
+          origin: "2Quad Building, Cardinal Rosales Ave, Cebu City, Cebu",
+          destination: "10.329193, 123.903982",
+          waypoints: waypts,
+          optimizeWaypoints: true,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var route = response.routes[0];
+            var totalDistance = '';
+            var replaceKm = 0;
+            var summaryPanel = document.getElementById('directions-panel');
+            summaryPanel.innerHTML = '';
+            // For each route, display summary information.
+            for (var i = 0; i < route.legs.length; i++) {
+              summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+              summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+              // summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+
+              totalDistance = route.legs[i].distance.text;
+              replaceKm += Number(totalDistance.replace('km',''));
+            } 
+            /*summaryPanel.innerHTML += route.legs[0].start_address + ' TO <br/>';
+            summaryPanel.innerHTML += route.legs[1].end_address + ' VIA <br/>';
+            summaryPanel.innerHTML += route.legs[0].end_address + ' <br/>';*/
+            summaryPanel.innerHTML += replaceKm.toFixed(2) + ' km';
+          } else {
+           directionsDisplay.set('directions', null);
+           document.getElementById('directions-panel').innerHTML = '';
+
+          }
+        });
+      }
+      //end of code for way points and calculations
+
 	</script>
 
 
 	<script type="text/javascript">
 	function get360Image () {
-
+		document.getElementById('directions-panel').innerHTML ='';
 		// check for CSS3 3D transformations and WebGL
 		if (ggHasHtml5Css3D() || ggHasWebGL()) {
 			// use HTML5 panorama
