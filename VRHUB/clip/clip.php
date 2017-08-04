@@ -36,7 +36,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 </head>
 <body class="index-page">
 	<!-- Navbar -->
-	<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+	<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll" style="padding: 0">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
@@ -66,18 +66,51 @@ if(!isset($_SESSION['UserData']['Username'])){
 							<i class="material-icons">map</i> Map
 						</a>
 					</li>
+
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">navigation</i> location
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">navigation</i> Commercial
 							<b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-right">
 							<li><a href="../2quad/2quad.php"><i class="material-icons">place</i> 2Quad</a></li>
+							<li><a href="../i1/i1.php"><i class="material-icons">place</i> i1</a></li>
+							<li><a href="../i2/i3.php"><i class="material-icons">place</i> i2</a></li>
+							<li><a href="../i3/i3.php"><i class="material-icons">place</i> i3</a></li>
+							<li><a href="../spark/spark.php"><i class="material-icons">place</i> Spark</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">navigation</i> Residential
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right">
 							<li><a href="../avalon/avalon.php"><i class="material-icons">place</i> Avalon</a></li>
 							<li><a href="../lgf1/lgf1.php"><i class="material-icons">place</i> La Guardia Flats 1</a></li>
 							<li><a href="../lgf2/lgf2.php"><i class="material-icons">place</i> La Guardia Flats 2</a></li>
-							<li><a href="../clip/clip.php"><i class="material-icons">place</i> Clip</a></li>
+							<li><a href="../eat/eat.php"><i class="material-icons">place</i> East Aurora Tower</a></li>
+							<li><a href="../mgf/mgf.php"><i class="material-icons">place</i> Mabolo Garden Flats</a></li>
+							<li><a href="../sjd/sjd.php"><i class="material-icons">place</i> St. John Dormitory</a></li>
 						</ul>
 					</li>
+					<!-- <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">navigation</i> Industrial
+							<b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu dropdown-menu-right">
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">navigation</i>MEPZA</a>
+										<b class="caret"></b>
+										<ul class="dropdown-menu dropdown-menu-right">
+											<li><a href="../avalon/avalon.php"><i class="material-icons">place</i> Avalon</a></li>
+											<li><a href="../lgf1/lgf1.php"><i class="material-icons">place</i> La Guardia Flats 1</a></li>
+											<li><a href="../lgf2/lgf2.php"><i class="material-icons">place</i> La Guardia Flats 2</a></li>
+											<li><a href="../eat/eat.php"><i class="material-icons">place</i> East Aurora Tower</a></li>
+											<li><a href="../mgf/mgf.php"><i class="material-icons">place</i> Mabolo Garden Flats</a></li>
+											<li><a href="../sjd/sjd.php"><i class="material-icons">place</i> St. John Dormitory</a></li>
+										</ul>
+								</li>
+							</ul>
+					</li> -->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">face</i> admin
 							<b class="caret"></b>
@@ -94,7 +127,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 	<div class="wrapper">
 		<div class="header" style="background-image: url('../assets/img/2quadbuilding.png');">
-			<div class="container">
+			<div class="container" style="margin-top: -100px;"> <!--margin top decreased-->
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="brand">
@@ -107,28 +140,17 @@ if(!isset($_SESSION['UserData']['Username'])){
 			</div>
 		</div>
 
-		<div class="main main-raised">
-			<div class="section section-basic">
-				<div class="page-header" style="margin: 40px 300px 20px; border-bottom: 3px solid #000000;">
-					<center><h1>Clip</h1></center>
-				</div>
-				
-				<div class="container" style="margin-top: 15px;">
-					<div style="z-index: 5; position: absolute; display: block; background-color: white; max-width: 300px; overflow: hidden;">
-							<select id="waypoints" style="z-index: 7; width: 300px; overflow: scroll;">
-								<option style="max-width: 300px; overflow: hidden;" value='none'>Please select route...</option>
-								<option style="max-width: 300px; overflow: hidden;" value="Osmeña Bridge, Lapu-Lapu City, Central Visayas">Osmeña Bridge, Lapu-Lapu City, Central Visayas</option>
-								<option style="max-width: 300px; overflow: hidden;" value="Marcelo Fernan Bridge, Mandaue City, Cebu, Philippines">Marcelo Fernan Bridge, Mandaue City, Cebu, Philippines</option>
-							</select>
-					</div>
-					<div style="z-index: 5; position: absolute; display: block; background-color: green; max-width: 300px; top: 180px; min-height: 300px;">
-						<div id="directions-panel" style="z-index: 6;">
-						</div>
-					</div>
+		<div class="main main-raised" style="margin-top: -260px;"> <!--margin top decreased-->
+			<div class="section section-basic" style="padding: 0"> <!--added padding-->
+				<!-- <div class="page-header" style="margin: 40px 300px 20px; border-bottom: 3px solid #000000;"> -->
+					<center><h2>Clip</h2></center>
+				<!-- </div> -->
+				<div id="directions-panel" style="position: absolute; z-index: 99; border: groove; right: 8%; top: 30%; background-color: rgba(0, 0, 0, 0.23); border-radius: 10px; max-width: 234px; font-weight: 600;"></div>
+				<!-- <div class="container" style="margin-top: 15px;"> -->
 					<div id="container" style="width:100%;height:100vh;">
 						<!--This content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version 10 or higher. -->
 					</div>
-				</div>
+				<!-- </div> -->
 			</div>
 		</div>
 
@@ -146,8 +168,17 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 	function getMap () {
 		//variables for waypoints
-		var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true}); //suppressMarkers removes the default marker e.g: A, B etc.
+		var viaA = 'Osmeña Bridge, Lapu-Lapu City, Central Visayas';
+		var directionsServiceA = new google.maps.DirectionsService;
+        var directionsDisplayA = new google.maps.DirectionsRenderer({suppressMarkers: true, polylineOptions: {
+      strokeColor: "#456E89"
+    }}); //suppressMarkers removes the default marker e.g: A, B etc.
+
+        var viaB = 'Marcelo Fernan Bridge, Mandaue City, Cebu';
+		var directionsServiceB = new google.maps.DirectionsService;
+        var directionsDisplayB = new google.maps.DirectionsRenderer({suppressMarkers: true, polylineOptions: {
+      strokeColor: "green"
+    }}); //suppressMarkers removes the default marker e.g: A, B etc.
         //variables for way points
 
 			var map = new google.maps.Map(document.getElementById('container'), {
@@ -161,10 +192,11 @@ if(!isset($_SESSION['UserData']['Username'])){
 			});
 
 		//codes for waypoints
-			directionsDisplay.setMap(map);
-			document.getElementById('waypoints').addEventListener('change', function (){
-	   		   		calculateAndDisplayRoute(directionsService, directionsDisplay);
-			});
+			directionsDisplayA.setMap(map);
+	   		calculateAndDisplayRoute(directionsServiceA, directionsDisplayA, viaA);
+
+			directionsDisplayB.setMap(map);
+	   		calculateAndDisplayRoute(directionsServiceB, directionsDisplayB, viaB);
    		//codes for waypoints
 
    		//set markers
@@ -192,19 +224,12 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 
 		}
+		
 
 		//code for waypoints and calculations
-		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var waypts = [];
-        var checkboxArray = document.getElementById('waypoints');
-        for (var i = 0; i < checkboxArray.length; i++) {
-          if (checkboxArray.options[i].selected) {
-            waypts.push({
-              location: checkboxArray[i].value,
-              stopover: true
-            });
-          }
-        }
+		function calculateAndDisplayRoute(directionsService, directionsDisplay, via) {
+		// var via = via;
+        var waypts = [{location: via, stopover: false}];
 
         directionsService.route({
           origin: "2Quad Building, Cardinal Rosales Ave, Cebu City, Cebu",
@@ -219,7 +244,7 @@ if(!isset($_SESSION['UserData']['Username'])){
             var totalDistance = '';
             var replaceKm = 0;
             var summaryPanel = document.getElementById('directions-panel');
-            summaryPanel.innerHTML = '';
+            summaryPanel.innerHTML = '<h3>Clip</h3>';
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
               /*summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
@@ -229,10 +254,16 @@ if(!isset($_SESSION['UserData']['Username'])){
               totalDistance = route.legs[i].distance.text;
               replaceKm += Number(totalDistance.replace('km',''));
             } 
-            summaryPanel.innerHTML += route.legs[0].start_address + ' TO <br/>';
-            summaryPanel.innerHTML += route.legs[1].end_address + ' VIA <br/>';
-            summaryPanel.innerHTML += route.legs[0].end_address + ' <br/>';
-            summaryPanel.innerHTML += replaceKm.toFixed(2) + ' km';
+            summaryPanel.innerHTML += 'From 2Quad Building To <br/>';
+            summaryPanel.innerHTML += 'Clip <br/>';
+            summaryPanel.innerHTML += 'Via Marcel Fernan Bridge (Old Bridge)<br/>';
+            summaryPanel.innerHTML += '15.00 km';
+
+            summaryPanel.innerHTML += 'From 2Quad Building To <br/>';
+            summaryPanel.innerHTML += 'Clip <br/>';
+            summaryPanel.innerHTML += 'Via Osmeña Bridge (Old Bridge)<br/>';
+            summaryPanel.innerHTML += '12.00 km';
+            // summaryPanel.innerHTML += replaceKm.toFixed(2) + ' km';
           } else {
            directionsDisplay.set('directions', null);
            document.getElementById('directions-panel').innerHTML = '';
@@ -246,7 +277,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 <script type="text/javascript">
 	function get360Image () {
 
-		document.getElementById('directions-panel').innerHTML ='';
+		document.getElementById('directions-panel').style.display ='none';
 			// check for CSS3 3D transformations and WebGL
 			if (ggHasHtml5Css3D() || ggHasWebGL()) {
 				// use HTML5 panorama

@@ -13,7 +13,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Avalon</title>
+	<title>St. John Dormintory</title>
 
 	<!-- Bootstrap CSS -->
 	<link href="../common/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 </head>
 <body class="index-page">
 	<!-- Navbar -->
-	<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+	<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll" style="padding: 0;">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
@@ -48,7 +48,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 				<a href="../map.php">
 					<div class="logo-container">
 						<div class="logo">
-							<img src="../assets/img/logo.png" alt="Creative Tim Logo" rel="tooltip" title="<b>Material Kit</b> was Designed & Coded with care by the staff from <b>Creative Tim</b>" data-placement="bottom" data-html="true">
+							<img src="../assets/img/logo.png" alt="Creative Tim Logo" rel="tooltip"  data-placement="bottom" data-html="true">
 						</div>
 						<div class="brand" style="margin-top: 18px;">
 							VR HUB
@@ -110,14 +110,13 @@ if(!isset($_SESSION['UserData']['Username'])){
 		<div class="main main-raised" style="margin-top: -260px;"> <!--margin top decreased-->
 			<div class="section section-basic" style="padding: 0"> <!--added padding-->
 				<!-- <div class="page-header" style="margin: 40px 300px 20px; border-bottom: 3px solid #000000;"> -->
-					<center><h2>Avalon</h2></center>
+					<center><h2>St. John Dormitory</h2></center>
 				<!-- </div> -->
-				<div id="directions-panel" style="position: absolute; z-index: 99; border: groove; right: 8%; top: 30%; background-color: rgba(0, 0, 0, 0.23); border-radius: 10px; max-width: 234px;font-weight: 600;"></div>
+				<div id="directions-panel" style="position: absolute; z-index: 99; border: groove; right: 8%; top: 30%;background-color: rgba(0, 0, 0, 0.23); border-radius: 10px; max-width: 234px; font-weight: 600;"></div>
 				<!-- <div class="container" style="margin-top: 15px;"> -->
 					<div id="container" style="width:100%;height:100vh;">
 						<!-- This content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version 10 or higher. -->
 					</div>
-
 				<!-- </div> -->
 			</div>
 		</div>
@@ -130,36 +129,37 @@ if(!isset($_SESSION['UserData']['Username'])){
 			</div>
 		</footer>
 	</div>
-	<script type="text/javascript">
+<script type="text/javascript">
 	function getMap () {
 		//variables for waypoints
 		var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true, polylineOptions: {
-      strokeColor: "#456E89"
-    }}); //suppressMarkers removes the default marker e.g: A, B etc.
+        var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true, polylineOptions: {strokeColor: "#456E89"}}); //suppressMarkers removes the default marker e.g: A, B etc.
+
         //variables for way points
+
 			var map = new google.maps.Map(document.getElementById('container'), {
-				zoom: 18,
+				zoom: 13,
 				streetViewControl: false,
-				center: {lat: 10.3152511, lng: 123.90460989999997},
+				center: {lat: 10.305767, lng: 123.898923},
 				mapTypeControl: true,
           		mapTypeControlOptions: {
               	style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
               	position: google.maps.ControlPosition.TOP_RIGHT}
 			});
-			//codes for waypoints
+
+		//codes for waypoints
 			directionsDisplay.setMap(map);
 	   		calculateAndDisplayRoute(directionsService, directionsDisplay);
-   			//codes for waypoints
+   		//codes for waypoints
 
-			//set markers
-			var markerAvalon = new google.maps.Marker({
-				position: {lat: 10.316122, lng: 123.90447300000005},
+   		//set markers
+   			var markerSJD = new google.maps.Marker({
+				position: {lat: 10.305767, lng: 123.898923},
 				map: map,
-				title: 'Avalon',
+				title: 'Mabolo Gardent Flats',
 				icon: '../src/icon_marker.png'
-			});
 
+			});
 			var marker2Quad = new google.maps.Marker({
 				position: {lat: 10.314291, lng: 123.905279},
 				map: map,
@@ -169,36 +169,23 @@ if(!isset($_SESSION['UserData']['Username'])){
 			});
 
 			//listen to click event, display 360 image when marker is clicked
-			markerAvalon.addListener('click', get360Image);
+			markerSJD.addListener('click', get360Image); 
 			marker2Quad.addListener('click', function (){
-				window.location.href = this.url;
+			window.location.href = this.url;
 			});
-			//end for marker
+		//end for markers
+
+
 		}
+		
 
 		//code for waypoints and calculations
 		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-			var first = new google.maps.LatLng(10.316205, 123.905841);
-            var second = new google.maps.LatLng(10.316965, 123.904020);
-            var third = new google.maps.LatLng(10.316836, 123.903938);
-            var fourth = new google.maps.LatLng(10.316480, 123.904539);
-        var waypts = [{location: first, stopover: false},
-                       {location: second, stopover: false},
-                       {location: third, stopover: false},
-                       {location: fourth, stopover: false}];
-        /*var checkboxArray = document.getElementById('waypoints');
-        for (var i = 0; i < checkboxArray.length; i++) {
-          if (checkboxArray.options[i].selected) {
-            waypts.push({
-              location: checkboxArray[i].value,
-              stopover: true
-            });
-          }
-        }*/
+        var waypts = [];
 
         directionsService.route({
           origin: "2Quad Building, Cardinal Rosales Ave, Cebu City, Cebu",
-          destination: "10.316387, 123.904662",
+          destination: "10.305767, 123.898923",
           waypoints: waypts,
           optimizeWaypoints: true,
           travelMode: 'DRIVING'
@@ -209,20 +196,19 @@ if(!isset($_SESSION['UserData']['Username'])){
             var totalDistance = '';
             var replaceKm = 0;
             var summaryPanel = document.getElementById('directions-panel');
-            summaryPanel.innerHTML = '<h3>Avalon</h3><hr  style="margin-bottom: 0; margin-top: 0;" />';
+            summaryPanel.innerHTML = '<h3>SJD</h3>';
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
-              summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+              /*summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
               summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-              // summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';*/
 
               totalDistance = route.legs[i].distance.text;
               replaceKm += Number(totalDistance.replace('km',''));
             } 
-            /*summaryPanel.innerHTML += route.legs[0].start_address + ' TO <br/>';
-            summaryPanel.innerHTML += route.legs[1].end_address + ' VIA <br/>';
-            summaryPanel.innerHTML += route.legs[0].end_address + ' <br/>';*/
-            summaryPanel.innerHTML += replaceKm.toFixed(2) + ' km';
+            
+            summaryPanel.innerHTML += replaceKm+' km from 2Quad';
+            // summaryPanel.innerHTML += replaceKm.toFixed(2) + ' km';
           } else {
            directionsDisplay.set('directions', null);
            document.getElementById('directions-panel').innerHTML = '';
@@ -231,42 +217,14 @@ if(!isset($_SESSION['UserData']['Username'])){
         });
       }
       //end of code for way points and calculations
-	</script>
+</script>
+
 
 	<script type="text/javascript">
-function get360Image(){
+function get360Image() {
 	document.getElementById('directions-panel').style.display ='none';
-		// check for CSS3 3D transformations and WebGL
-		if (ggHasHtml5Css3D() || ggHasWebGL()) {
-			// use HTML5 panorama
-			// create the panorama player with the container
-			pano=new pano2vrPlayer("container");
-		} else 
-		if (swfobject.hasFlashPlayerVersion("10.0.0")) {
-			var flashvars = {};
-			var params = {};
-			// enable javascript interface
-			flashvars.externalinterface="1";
-			params.quality = "high";
-			params.bgcolor = "";
-			params.allowscriptaccess = "sameDomain";
-			params.allowfullscreen = "true";
-			var attributes = {};
-			attributes.id = "flashpano";
-			attributes.name = "flashpano";
-			attributes.align = "middle";
-
-			params.base=".";
-			params.wmode = "transparent";
-			pano=new pano2vrPlayer("container",{ useFlash:true, flashPlayerId: 'flashpano', flashContainerId:'flashcontainer'});
-			swfobject.embedSWF("pano2vr_player.swf", "flashcontainer", "100%", "100%", "10.0.0", "", flashvars, params, attributes);
-		}
-		// add the skin object
-		skin=new pano2vrSkin(pano);
-
-			// load the configuration when markerAvalon is clicked
-			pano.readConfigUrlAsync("pano.xml");
-	}
+		
+}
 	</script>
 
 	<script src="../common/js/jquery.min.js" type="text/javascript"></script>
@@ -283,8 +241,8 @@ function get360Image(){
 	<script src="../common/js/material-kit.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
-		//this function is not working
-		/*$().ready(function(){
+
+		$().ready(function(){
 				// the body of this function is in assets/material-kit.js
 				materialKit.initSliders();
 				window_width = $(window).width();
@@ -295,8 +253,9 @@ function get360Image(){
 					$(window).on('scroll', materialKitDemo.checkScrollForParallax);
 				}
 
-			});*/
+			});
 	</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZvVMstskP1EecnVeMt7mDDWVWHuEwIKc&libraries=geometry&callback=getMap"></script>
+
 </body>
 </html>

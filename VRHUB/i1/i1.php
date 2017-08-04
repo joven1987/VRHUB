@@ -13,7 +13,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>I1 Building</title>
+	<title>I1</title>
 
 	<!-- Bootstrap CSS -->
 	<link href="../common/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 </head>
 <body class="index-page">
 	<!-- Navbar -->
-	<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+	<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll" style="padding: 0;">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
@@ -48,7 +48,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 				<a href="../map.php">
 					<div class="logo-container">
 						<div class="logo">
-							<img src="../assets/img/logo.png" alt="Creative Tim Logo" rel="tooltip" data-placement="bottom" data-html="true">
+							<img src="../assets/img/logo.png" alt="Creative Tim Logo" rel="tooltip"  data-placement="bottom" data-html="true">
 						</div>
 						<div class="brand" style="margin-top: 18px;">
 							VR HUB
@@ -71,9 +71,10 @@ if(!isset($_SESSION['UserData']['Username'])){
 							<b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-right">
-							<li><a href="../itpark.php"><i class="material-icons">place</i> Cebu IT Park</a></li>
-							<li><a href="../lgf.php"><i class="material-icons">place</i> La Guardia Flats</a></li>
-							<li><a href="../cebubusinesspark.php"><i class="material-icons">place</i> Cebu Business Park</a></li>
+							<li><a href="../2quad/2quad.php"><i class="material-icons">place</i> 2Quad</a></li>
+							<li><a href="../avalon/avalon.php"><i class="material-icons">place</i> Avalon</a></li>
+							<li><a href="../lgf1/lgf1.php"><i class="material-icons">place</i> La Guardia Flats 1</a></li>
+							<li><a href="../lgf2/lgf2.php"><i class="material-icons">place</i> La Guardia Flats 2</a></li>
 							<li><a href="../clip/clip.php"><i class="material-icons">place</i> Clip</a></li>
 						</ul>
 					</li>
@@ -93,7 +94,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 	<div class="wrapper">
 		<div class="header" style="background-image: url('../assets/img/2quadbuilding.png');">
-			<div class="container">
+			<div class="container" style="margin-top: -100px;"> <!--margin top decreased-->
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="brand">
@@ -106,18 +107,17 @@ if(!isset($_SESSION['UserData']['Username'])){
 			</div>
 		</div>
 
-		<div class="main main-raised">
-			<div class="section section-basic">
-				<div class="page-header" style="margin: 40px 300px 20px; border-bottom: 3px solid #000000;">
-					<center><h1>I1 building</h1></center>
-				</div>
-				<div class="container" style="margin-top: 15px;">
-
+		<div class="main main-raised" style="margin-top: -260px;"> <!--margin top decreased-->
+			<div class="section section-basic" style="padding: 0"> <!--added padding-->
+				<!-- <div class="page-header" style="margin: 40px 300px 20px; border-bottom: 3px solid #000000;"> -->
+					<center><h2>I1</h2></center>
+				<!-- </div> -->
+				<div id="directions-panel" style="position: absolute; z-index: 99; border: groove; right: 8%; top: 30%;background-color: rgba(0, 0, 0, 0.23); border-radius: 10px; max-width: 234px; font-weight: 600;"></div>
+				<!-- <div class="container" style="margin-top: 15px;"> -->
 					<div id="container" style="width:100%;height:100vh;">
-						This content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version 10 or higher.
+						<!-- This content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version 10 or higher. -->
 					</div>
-
-				</div>
+				<!-- </div> -->
 			</div>
 		</div>
 
@@ -129,10 +129,99 @@ if(!isset($_SESSION['UserData']['Username'])){
 			</div>
 		</footer>
 	</div>
+<script type="text/javascript">
+	function getMap () {
+		//variables for waypoints
+		var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true, polylineOptions: {strokeColor: "#456E89"}}); //suppressMarkers removes the default marker e.g: A, B etc.
+
+        //variables for way points
+
+			var map = new google.maps.Map(document.getElementById('container'), {
+				zoom: 13,
+				streetViewControl: false,
+				center: {lat: 10.328706, lng: 123.907481},
+				mapTypeControl: true,
+          		mapTypeControlOptions: {
+              	style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              	position: google.maps.ControlPosition.TOP_RIGHT}
+			});
+
+		//codes for waypoints
+			directionsDisplay.setMap(map);
+	   		calculateAndDisplayRoute(directionsService, directionsDisplay);
+   		//codes for waypoints
+
+   		//set markers
+   			var markerI1 = new google.maps.Marker({
+				position: {lat: 10.328706, lng: 123.907481},
+				map: map,
+				title: 'i1',
+				icon: '../src/icon_marker.png'
+
+			});
+			var marker2Quad = new google.maps.Marker({
+				position: {lat: 10.314291, lng: 123.905279},
+				map: map,
+				title: '2Quad',
+				icon: '../src/icon_marker.png',
+				url: '../2quad/2quad.php'
+			});
+
+			//listen to click event, display 360 image when marker is clicked
+			markerI1.addListener('click', get360Image); 
+			marker2Quad.addListener('click', function (){
+			window.location.href = this.url;
+			});
+		//end for markers
 
 
-	<script type="text/javascript">
+		}
+		
 
+		//code for waypoints and calculations
+		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var waypts = [];
+
+        directionsService.route({
+          origin: "2Quad Building, Cardinal Rosales Ave, Cebu City, Cebu",
+          destination: "10.328706, 123.907481",
+          waypoints: waypts,
+          optimizeWaypoints: true,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var route = response.routes[0];
+            var totalDistance = '';
+            var replaceKm = 0;
+            var summaryPanel = document.getElementById('directions-panel');
+            summaryPanel.innerHTML = '<h3>i1</h3>';
+            // For each route, display summary information.
+            for (var i = 0; i < route.legs.length; i++) {
+              /*summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+              summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';*/
+
+              totalDistance = route.legs[i].distance.text;
+              replaceKm += Number(totalDistance.replace('km',''));
+            } 
+            
+            summaryPanel.innerHTML += replaceKm+' km from 2Quad';
+            // summaryPanel.innerHTML += replaceKm.toFixed(2) + ' km';
+          } else {
+           directionsDisplay.set('directions', null);
+           document.getElementById('directions-panel').innerHTML = '';
+
+          }
+        });
+      }
+      //end of code for way points and calculations
+</script>
+
+<script type="text/javascript">
+function get360Image() {
+	document.getElementById('directions-panel').style.display ='none';
 		// check for CSS3 3D transformations and WebGL
 		if (ggHasHtml5Css3D() || ggHasWebGL()) {
 			// use HTML5 panorama
@@ -161,9 +250,8 @@ if(!isset($_SESSION['UserData']['Username'])){
 		// add the skin object
 		skin=new pano2vrSkin(pano);
 		// load the configuration
-		window.addEventListener("load", function() {
 			pano.readConfigUrlAsync("pano.xml");
-		});
+	}
 	</script>
 
 	<script src="../common/js/jquery.min.js" type="text/javascript"></script>
@@ -194,6 +282,7 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 			});
 	</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZvVMstskP1EecnVeMt7mDDWVWHuEwIKc&libraries=geometry&callback=getMap"></script>
 
 </body>
 </html>
